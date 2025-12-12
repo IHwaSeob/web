@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  .light { width: 100px; height: 100px; margin: 20px auto; border-radius: 50%; }
+  #red    { background: darkred; }
+  #yellow { background: darkgoldenrod; }
+  #green  { background: darkgreen; }
+  .on { box-shadow: 0 0 50px 20px yellow !important; background: red !important; }
+  .on:nth-child(2) { background: yellow !important; }
+  .on:nth-child(3) { background: lime !important; }
+</style>
+</head>
+<body>
+
+<div class="light" id="red">RED</div>
+<div class="light" id="yellow">YELLOW</div>
+<div class="light" id="green">GREEN</div>
+
+<script>
+// 초간단 신호등 (setTimeout만 사용)
+function trafficLight() {
+  document.getElementById('red').classList.remove('on');
+  document.getElementById('yellow').classList.remove('on');
+  document.getElementById('green').classList.add('on');    // 초록불 켜기
+
+  setTimeout(() => {
+    document.getElementById('green').classList.remove('on');
+    document.getElementById('yellow').classList.add('on'); // 노랑불
+
+    setTimeout(() => {
+      document.getElementById('yellow').classList.remove('on');
+      document.getElementById('red').classList.add('on');    // 빨간불
+
+      setTimeout(trafficLight, 3000); // 3초 후 다시 초록불로 반복
+    }, 2000); // 노랑불 2초
+
+  }, 5000); // 초록불 5초
+}
+
+// 시작!
+trafficLight();
+</script>
+
+</body>
+</html>
